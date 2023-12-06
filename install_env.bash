@@ -51,6 +51,7 @@ sudo rm -rf /squashfs-root
 sudo mv squashfs-root /
 sudo ln -sf /squashfs-root/AppRun /usr/bin/nvim
 LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
+export PATH=$PATH:$HOME/.local/bin
 mkdir font && pushd font
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/JetBrainsMono.tar.xz
 tar xvf Jet*
