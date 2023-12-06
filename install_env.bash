@@ -10,10 +10,13 @@ pushd install_env
 
 # most basic env
 sudo apt update && sudo apt upgrade -y
-sudo apt-get install -y libncurses5-dev build-essential curl git python-is-python3 python3-pip tmux terminator
+sudo apt-get install -y libncurses5-dev build-essential curl git python-is-python3 python3-pip tmux terminator vim
 sudo apt install -y software-properties-common
 sudo add-apt-repository universe
 sudo snap install code
+
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i *deb
 
 # docker
 sudo apt-get update
@@ -50,7 +53,7 @@ LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.
 mkdir font && pushd font
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/JetBrainsMono.tar.xz
 tar xvf Jet*
-cp -r *ttf /usr/share/fonts/
+sudo cp -r *ttf /usr/share/fonts/
 sudo fc-cache -fv
 
 # install clang
