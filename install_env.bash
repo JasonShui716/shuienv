@@ -58,6 +58,8 @@ sudo cp -r *ttf /usr/share/fonts/
 sudo fc-cache -fv
 
 # install clang
+sudo bash -c 'touch /etc/apt/apt.conf.d/99verify-peer.conf \
+&& echo >>/etc/apt/apt.conf.d/99verify-peer.conf "Acquire { https::Verify-Peer false }"'
 sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
 sudo apt install -y libc++abi-17-dev libc++-17-dev lldb-17 clangd-17
 sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-17 100
