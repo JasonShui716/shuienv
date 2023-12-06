@@ -1,8 +1,10 @@
 #!/bin/bash
+set -x
+set -e
 
 pushd ~
-mkdir workspace
-mkdir playground
+mkdir -p workspace
+mkdir -p playground
 mkdir install_env && cd install_env
 
 # most basic env
@@ -13,6 +15,7 @@ sudo add-apt-repository universe
 sudo snap install -y code python-is-python3 python3-pip tmux
 
 # zsh install
+sudo apt install -y zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # docker
@@ -62,4 +65,4 @@ sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-17 100
 clang -v
 clang++ -v
 
-popd
+cd ~ && rm -rf ~/install_env
