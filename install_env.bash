@@ -53,6 +53,7 @@ sudo rm -rf /squashfs-root
 sudo mv squashfs-root /
 sudo ln -sf /squashfs-root/AppRun /usr/bin/nvim
 LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
+cp $SCRIPT_DIR/config.lua $HOME/.config/lvim/config.lua
 echo 'export PATH=$PATH:$HOME/.local/bin' >> $HOME/.bashrc
 
 mkdir font && pushd font
