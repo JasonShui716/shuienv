@@ -43,7 +43,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 source ~/.bashrc
 nvm install node
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-source ~/.bashrc
+. $HOME/.cargo/env
 
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
@@ -53,7 +53,7 @@ sudo rm -rf /squashfs-root
 sudo mv squashfs-root /
 sudo ln -sf /squashfs-root/AppRun /usr/bin/nvim
 LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
-echo 'export PATH=$PATH:$HOME/.local/bin' > $HOME/.bashrc
+echo 'export PATH=$PATH:$HOME/.local/bin' >> $HOME/.bashrc
 
 mkdir font && pushd font
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/JetBrainsMono.tar.xz
@@ -70,7 +70,7 @@ wget https://github.com/Kitware/CMake/releases/download/v3.27.9/cmake-3.27.9-lin
 sudo bash cmake*.sh  --skip-license --prefix=/usr/local
 
 sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
-sudo apt install -y libc++abi-17-dev libc++-17-dev lldb-17 clangd-17 libstdc++-13
+sudo apt install -y libc++abi-17-dev libc++-17-dev lldb-17 clangd-17 libstdc++-12-dev
 sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-17 100
 sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-17 100
 sudo update-alternatives --install /usr/bin/lldb lldb /usr/bin/lldb-17 100
