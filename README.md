@@ -1,6 +1,8 @@
 # shuienv
 
+## Debian/Ubuntu Only
+
+Tested on Ubuntu 22.04
 ```
-wget -O shuienv.zip https://codeload.github.com/JasonShui716/shuienv/zip/refs/heads/main && \
- unzip shuienv.zip && pushd shuienv-main && bash install_env.bash
+bash -c "$(wget -O - https://raw.githubusercontent.com/JasonShui716/shuienv/main/shuienv)"
 ```
