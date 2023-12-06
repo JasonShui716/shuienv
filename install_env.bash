@@ -5,22 +5,19 @@ set -e
 pushd ~
 mkdir -p workspace
 mkdir -p playground
-mkdir install_env && cd install_env
+mkdir install_env
+pushd install_env
 
 # most basic env
-sudo apt update
-sudo apt-get install -y qemu qemu-system libncurses5-dev build-essential kernel-package curl git
+sudo apt update && sudo apt upgrade -y
+sudo apt-get install -y libncurses5-dev build-essential curl git python-is-python3 python3-pip tmux terminator
 sudo apt install -y software-properties-common
 sudo add-apt-repository universe
-sudo snap install -y code python-is-python3 python3-pip tmux
-
-# zsh install
-sudo apt install -y zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sudo snap install code
 
 # docker
 sudo apt-get update
-sudo apt-get install ca-certificates curl gnupg
+sudo apt-get install -y ca-certificates curl gnupg
 sudo install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
@@ -31,23 +28,24 @@ echo \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 
 # node, rust, lunarvim
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.6/install.sh | bash
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-source ~/.zshrc
-nvm install -y node
+source ~/.bashrc
+nvm install node
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
 ./nvim.appimage --appimage-extract
 ./squashfs-root/AppRun --version
+sudo rm -rf /squashfs-root
 sudo mv squashfs-root /
-sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
+sudo ln -sf /squashfs-root/AppRun /usr/bin/nvim
 LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
 mkdir font && pushd font
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/JetBrainsMono.tar.xz
