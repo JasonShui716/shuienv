@@ -13,7 +13,7 @@ sudo apt update && sudo apt upgrade -y
 sudo apt-get install -y libncurses5-dev build-essential curl git python-is-python3 python3-pip tmux terminator vim
 sudo apt install -y software-properties-common
 sudo add-apt-repository universe
-sudo snap install code
+sudo snap install code --classic
 
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i *deb
@@ -41,6 +41,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 source ~/.bashrc
 nvm install node
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source ~/.bashrc
 
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
