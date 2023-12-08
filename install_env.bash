@@ -70,12 +70,13 @@ sudo bash -c 'touch /etc/apt/apt.conf.d/99verify-peer.conf \
 wget https://github.com/Kitware/CMake/releases/download/v3.27.9/cmake-3.27.9-linux-x86_64.sh
 sudo bash cmake*.sh  --skip-license --prefix=/usr/local
 
-sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
-sudo apt install -y libc++abi-17-dev libc++-17-dev lldb-17 clangd-17 libstdc++-12-dev clang-tidy clang-format
-sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-17 100
-sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-17 100
-sudo update-alternatives --install /usr/bin/lldb lldb /usr/bin/lldb-17 100
-sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-17 100
+LLVM_VERSION=16
+
+sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)" -- $LLVM_VERSION all
+sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-$LLVM_VERSION 300
+sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-$LLVM_VERSION 300
+sudo update-alternatives --install /usr/bin/lldb lldb /usr/bin/lldb-$LLVM_VERSION 300
+sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-$LLVM_VERSION 300
 clang -v
 clang++ -v
 
